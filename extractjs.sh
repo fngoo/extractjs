@@ -28,6 +28,8 @@ mv split_00$i dir_$i/$input
 echo '#!/bin/bash' >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo 'x=$x ; input=httprobe.txt' >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "getJS -input $input -complete -output getjs${i}.txt; cat getjs${i}.txt >> getjs.txt; rm getjs${i}.txt" >> /root/script/3_httprobe/dir_${i}/${i}.sh
+echo "cd /root/script/3_httprobe; rm -r /root/script/3_httprobe/dir_$i/dir_$num" >> /root/script/3_httprobe/dir_$i/dir_$num/${i}.sh
+
 done
 
 
@@ -42,6 +44,7 @@ cat exe.sh | parallel --jobs 0 --progress --delay 1
 
 for i in `seq 1 $x`
 do
+cd /root/script/3_httprobe
 rm -r dir_$i
 done
 
