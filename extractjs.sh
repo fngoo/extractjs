@@ -28,7 +28,6 @@ mv split_00$i dir_$i/$input
 echo '#!/bin/bash' >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo 'x=$x ; input=httprobe.txt' >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "getJS -input $input -complete -output getjs${i}.txt; cat getjs${i}.txt >> getjs.txt; rm getjs${i}.txt" >> /root/script/3_httprobe/dir_${i}/${i}.sh
-echo "cd /root/script/3_httprobe; rm -r /root/script/3_httprobe/dir_$i" >> /root/script/3_httprobe/dir_$i/${i}.sh
 
 done
 
