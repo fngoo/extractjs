@@ -2,6 +2,22 @@
 
 #创建目录
 x=8 ; input=httprobe.txt ; export x=8 ; export input=httprobe.txt
+length=`wc -l $input|grep -o -P ".*?(?=\ )"`
+#dir_num=$((x*x))
+if [ $length -lt $x ]
+then
+i=1
+mkdir dir_$i
+cp $input /root/script/3_httprobe/dir_${i}/${input}
+echo '#!/bin/bash' >> /root/script/3_httprobe/dir_${i}/${i}.sh
+echo 'x=$x ; input=httprobe.txt' >> /root/script/3_httprobe/dir_${i}/${i}.sh
+echo "getJS -input $input -complete -output getjs${i}.txt; cat getjs${i}.txt >> getjs.txt; rm getjs${i}.txt" >> /root/script/3_httprobe/dir_${i}/${i}.sh
+bash /root/script/3_httprobe/dir_${i}/${i}.sh
+rm /root/script/3_httprobe/dir_${i} -r
+
+
+else
+
 for i in `seq 1 $x`
 do
 mkdir dir_$i
@@ -41,13 +57,16 @@ done
 
 cat exe.sh | parallel --jobs 0 --progress --delay 1
 
+rm exe.sh
+
 cd /root/script/3_httprobe
 for i in `seq 1 $x`
 do
 rm -r dir_$i
 done
+fi
 
-sort -u /root/script/3_httprobe/httprobe.txt -o /root/script/3_httprobe/httprobe.txt ; rm exe.sh
+sort -u /root/script/3_httprobe/httprobe.txt -o /root/script/3_httprobe/httprobe.txt
 
 
 
@@ -62,6 +81,24 @@ sort -u /root/script/3_httprobe/httprobe.txt -o /root/script/3_httprobe/httprobe
 mv JSFinder/JSFinder.py JSFinder.py 
 #创建目录
 x=8 ; input=getjs.txt ; export x=8 ; export input=getjs.txt
+length=`wc -l $input|grep -o -P ".*?(?=\ )"`
+#dir_num=$((x*x))
+if [ $length -lt $x ]
+then
+i=1
+mkdir dir_$i
+cp $input /root/script/3_httprobe/dir_${i}/${input}
+echo '#!/bin/bash' >> /root/script/3_httprobe/dir_${i}/${i}.sh
+echo 'x=$x ; input=httprobe.txt' >> /root/script/3_httprobe/dir_${i}/${i}.sh
+echo "python3 JSFinder.py -f $input -j >> $output/3_endpoint_JS.txt" >> /root/script/3_httprobe/dir_${i}/${i}.sh
+echo "cd /root/script/3_httprobe; rm -r /root/script/3_httprobe/dir_$i" >> /root/script/3_httprobe/dir_$i/${i}.sh
+bash /root/script/3_httprobe/dir_${i}/${i}.sh
+rm -r /root/script/3_httprobe/dir_${i}
+
+
+
+else
+
 for i in `seq 1 $x`
 do
 mkdir dir_$i
@@ -102,10 +139,13 @@ done
 
 cat exe.sh | parallel --jobs 0 --progress --delay 1
 
+rm exe.sh
+
 cd /root/script/3_httprobe
 for i in `seq 1 $x`
 do
 rm -r dir_$i
 done
+fi
 
-sort -u /root/script/3_httprobe/httprobe.txt -o /root/script/3_httprobe/httprobe.txt ; rm exe.sh
+sort -u /root/script/3_httprobe/httprobe.txt -o /root/script/3_httprobe/httprobe.txt
