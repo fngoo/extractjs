@@ -1,5 +1,6 @@
 #!/bin/bash
 
+cd /root/script/3_httprobe
 #创建目录
 x=8 ; input=httprobe.txt ; export x=8 ; export input=httprobe.txt
 length=`wc -l $input|grep -o -P ".*?(?=\ )"`
@@ -7,13 +8,14 @@ length=`wc -l $input|grep -o -P ".*?(?=\ )"`
 if [ $length -lt $x ]
 then
 i=1
-mkdir dir_$i
-cp $input /root/script/3_httprobe/dir_${i}/${input}
-echo '#!/bin/bash' >> /root/script/3_httprobe/dir_${i}/${i}.sh
-echo 'x=$x ; input=httprobe.txt' >> /root/script/3_httprobe/dir_${i}/${i}.sh
-echo "getJS -input $input -complete -output getjs${i}.txt; cat getjs${i}.txt >> getjs.txt; rm getjs${i}.txt" >> /root/script/3_httprobe/dir_${i}/${i}.sh
-bash /root/script/3_httprobe/dir_${i}/${i}.sh
-rm /root/script/3_httprobe/dir_${i} -r
+#mkdir dir_$i
+#cp $input /root/script/3_httprobe/dir_${i}/${input}
+#echo '#!/bin/bash' >> /root/script/3_httprobe/dir_${i}/${i}.sh
+#echo 'x=$x ; input=httprobe.txt' >> /root/script/3_httprobe/dir_${i}/${i}.sh
+x=$x ; input=httprobe.txt
+getJS -input $input -complete -output getjs${i}.txt; cat getjs${i}.txt >> getjs.txt; rm getjs${i}.txt
+#bash /root/script/3_httprobe/dir_${i}/${i}.sh
+#rm /root/script/3_httprobe/dir_${i} -r
 
 
 else
@@ -43,7 +45,8 @@ do
 mv split_00$i dir_$i/$input
 echo '#!/bin/bash' >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo 'x=$x ; input=httprobe.txt' >> /root/script/3_httprobe/dir_${i}/${i}.sh
-echo "getJS -input $input -complete -output getjs${i}.txt; cat getjs${i}.txt >> getjs.txt; rm getjs${i}.txt" >> /root/script/3_httprobe/dir_${i}/${i}.sh
+echo "cd /root/script/3_httprobe/dir_${i}" >> /root/script/3_httprobe/dir_${i}/${i}.sh
+echo "getJS -input $input -complete -output getjs${i}.txt; cat getjs${i}.txt >> /root/script/3_httprobe/getjs.txt; rm getjs${i}.txt" >> /root/script/3_httprobe/dir_${i}/${i}.sh
 
 done
 
@@ -65,9 +68,10 @@ do
 rm -r dir_$i
 done
 fi
+rm dir_* -r
 
 sort -u /root/script/3_httprobe/httprobe.txt -o /root/script/3_httprobe/httprobe.txt
-
+sort -u /root/script/3_httprobe/getjs.txt -o /root/script/3_httprobe/getjs.txt
 
 
 
@@ -86,14 +90,10 @@ length=`wc -l $input|grep -o -P ".*?(?=\ )"`
 if [ $length -lt $x ]
 then
 i=1
-mkdir dir_$i
-cp $input /root/script/3_httprobe/dir_${i}/${input}
-echo '#!/bin/bash' >> /root/script/3_httprobe/dir_${i}/${i}.sh
-echo 'x=$x ; input=httprobe.txt' >> /root/script/3_httprobe/dir_${i}/${i}.sh
-echo "python3 JSFinder.py -f $input -j >> $output/3_endpoint_JS.txt" >> /root/script/3_httprobe/dir_${i}/${i}.sh
-echo "cd /root/script/3_httprobe; rm -r /root/script/3_httprobe/dir_$i" >> /root/script/3_httprobe/dir_$i/${i}.sh
-bash /root/script/3_httprobe/dir_${i}/${i}.sh
-rm -r /root/script/3_httprobe/dir_${i}
+x=$x ; input=httprobe.txt
+python3 JSFinder.py -f $input -j >> $output/3_endpoint_JS.txt
+rm -r /root/script/3_httprobe/dir_$i
+
 
 
 
@@ -124,6 +124,8 @@ do
 mv split_00$i dir_$i/$input
 echo '#!/bin/bash' >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo 'x=$x ; input=httprobe.txt' >> /root/script/3_httprobe/dir_${i}/${i}.sh
+echo "cp JSFinder/JSFinder.py /root/script/3_httprobe/dir_${i}/JSFinder.py" >> /root/script/3_httprobe/dir_${i}/${i}.sh
+echo "cd /root/script/3_httprobe/dir_${i}" >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "python3 JSFinder.py -f $input -j >> $output/3_endpoint_JS.txt" >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "cd /root/script/3_httprobe; rm -r /root/script/3_httprobe/dir_$i" >> /root/script/3_httprobe/dir_$i/${i}.sh
 
@@ -147,5 +149,6 @@ do
 rm -r dir_$i
 done
 fi
+rm dir_* -r
 
 sort -u /root/script/3_httprobe/httprobe.txt -o /root/script/3_httprobe/httprobe.txt
