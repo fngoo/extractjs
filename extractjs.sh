@@ -15,7 +15,7 @@ mkdir /root/script/3_httprobe/dir_$i
 echo '#!/bin/bash' >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo 'x=$x ; input=httprobe.txt' >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "cd /root/script/3_httprobe/dir_${i}" >> /root/script/3_httprobe/dir_${i}/${i}.sh
-echo "cat \$line /root/script/3_httprobe/dir_${i}/${input}" >> /root/script/3_httprobe/dir_${i}/${i}.sh
+echo "cat \$line >> /root/script/3_httprobe/dir_${i}/${input}" >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "getJS -input $input -complete -output getjs${i}.txt; cat getjs${i}.txt >> /root/script/3_httprobe/getjs.txt; rm getjs${i}.txt" >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "cd /root/script/3_httprobe ; rm -r /root/script/3_httprobe/dir_${i}" >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "bash /root/script/3_httprobe/dir_$i/${i}.sh" >> /root/script/3_httprobe/exe.sh
@@ -52,7 +52,7 @@ echo '#!/bin/bash' >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo 'input=getjs.txt' >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "cp JSFinder.py /root/script/3_httprobe/dir_${i}/JSFinder.py" >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "cd /root/script/3_httprobe/dir_${i}" >> /root/script/3_httprobe/dir_${i}/${i}.sh
-echo "cat \$line /root/script/3_httprobe/dir_${i}/${input}" >> /root/script/3_httprobe/dir_${i}/${i}.sh
+echo "cat \$line >> /root/script/3_httprobe/dir_${i}/${input}" >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "python3 JSFinder.py -f $input -j >> $output/3_endpoint_JS.txt" >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "cd /root/script/3_httprobe; rm -r /root/script/3_httprobe/dir_$i" >> /root/script/3_httprobe/dir_$i/${i}.sh
 echo "bash /root/script/3_httprobe/dir_$i/${i}.sh" >> /root/script/3_httprobe/exe.sh
