@@ -124,7 +124,7 @@ do
 mv split_00$i dir_$i/$input
 echo '#!/bin/bash' >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo 'x=$x ; input=httprobe.txt' >> /root/script/3_httprobe/dir_${i}/${i}.sh
-echo "cp JSFinder/JSFinder.py /root/script/3_httprobe/dir_${i}/JSFinder.py" >> /root/script/3_httprobe/dir_${i}/${i}.sh
+echo "cp JSFinder.py /root/script/3_httprobe/dir_${i}/JSFinder.py" >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "cd /root/script/3_httprobe/dir_${i}" >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "python3 JSFinder.py -f $input -j >> $output/3_endpoint_JS.txt" >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "cd /root/script/3_httprobe; rm -r /root/script/3_httprobe/dir_$i" >> /root/script/3_httprobe/dir_$i/${i}.sh
