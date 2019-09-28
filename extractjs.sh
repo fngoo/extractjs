@@ -36,8 +36,8 @@ ls ; wc -l /root/script/3_httprobe/getjs.txt
 
 
 
-#JSFinder
-cp JSFinder/JSFinder.py JSFinder.py 
+#LinkFinder
+
 #创建目录
 input=getjs.txt ; export input=getjs.txt
 i=1
@@ -50,10 +50,9 @@ mkdir /root/script/3_httprobe/dir_$i
 
 echo '#!/bin/bash' >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo 'input=getjs.txt' >> /root/script/3_httprobe/dir_${i}/${i}.sh
-echo "cp JSFinder.py /root/script/3_httprobe/dir_${i}/JSFinder.py" >> /root/script/3_httprobe/dir_${i}/${i}.sh
+echo "cp -rf /root/script/3_httprobe/LinkFinder/* /root/script/3_httprobe/dir_${i}/" >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "cd /root/script/3_httprobe/dir_${i}" >> /root/script/3_httprobe/dir_${i}/${i}.sh
-echo "echo '$line' >> /root/script/3_httprobe/dir_${i}/${input}" >> /root/script/3_httprobe/dir_${i}/${i}.sh
-echo "python3 JSFinder.py -f $input -j >> $output/3_endpoint_JS.txt" >> /root/script/3_httprobe/dir_${i}/${i}.sh
+echo "python3 linkfinder.py -i '$line' -o cli>> $output/3_endpoint_JS.txt" >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "cd /root/script/3_httprobe; rm -r /root/script/3_httprobe/dir_$i" >> /root/script/3_httprobe/dir_$i/${i}.sh
 echo "bash /root/script/3_httprobe/dir_$i/${i}.sh" >> /root/script/3_httprobe/exe.sh
 i=$((i+1))
