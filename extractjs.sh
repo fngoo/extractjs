@@ -52,7 +52,7 @@ echo '#!/bin/bash' >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo 'input=getjs.txt' >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "cp -rf /root/script/3_httprobe/LinkFinder/* /root/script/3_httprobe/dir_${i}/" >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "cd /root/script/3_httprobe/dir_${i}" >> /root/script/3_httprobe/dir_${i}/${i}.sh
-echo "echo \"$line\" >> $output/3_endpoint_JS.txt ; echo '------------ ----------- ----------------' >> $output/3_endpoint_JS.txt ; python3 linkfinder.py -i '$line' -o cli>> $output/3_endpoint_JS.txt ; echo;echo;echo;echo;echo" >> /root/script/3_httprobe/dir_${i}/${i}.sh
+echo "python3 linkfinder.py -i '$line' -o cli >> cli.txt ; head=`echo "${line}" | grep -oP "http.*\/"` ; for cli in `cat cli.txt`; do if [ "${cli:0:4}" != "http" ]; then c=${cli:1} ; out=$head$c ; sed "s,${cli},${out},g" cli.txt >> asd.txt ; mv asd.txt cli.txt  ; fi; done; cat cli.txt >> $output/3_endpoint_JS.txt ; rm cli.txt" >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "cd /root/script/3_httprobe; rm -r /root/script/3_httprobe/dir_${i}" >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "bash /root/script/3_httprobe/dir_$i/${i}.sh" >> /root/script/3_httprobe/exe.sh
 i=$((i+1))
@@ -66,3 +66,8 @@ rm dir_* -r
 
 sort -u /root/script/3_httprobe/httprobe.txt -o /root/script/3_httprobe/httprobe.txt
 ls ; wc -l $output/3_endpoint_JS.txt
+
+
+#Eyeiwtness
+cd /root/script/4_getjs/EyeWitness
+python EyeWitness.py -f $output/3_endpoint_JS.txt --all-protocols -d $output/3_endpoint_JS
