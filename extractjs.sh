@@ -71,3 +71,4 @@ ls ; wc -l $output/3_endpoint_JS.txt
 #Eyeiwtness
 cd /root/script/4_getjs/EyeWitness
 python EyeWitness.py -f $output/3_endpoint_JS.txt --all-protocols -d $output/3_endpoint_JS
+cd /root/script/3_httprobe
