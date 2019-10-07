@@ -65,6 +65,7 @@ rm /root/script/3_httprobe/exe.sh
 
 rm dir_* -r
 
+grep -oP "http.*" $output/3_endpoint_JS.txt > $output/3_endpoint_JS123.txt ; mv $output/3_endpoint_JS123.txt $output/3_endpoint_JS.txt
 sort -u /root/script/3_httprobe/httprobe.txt -o /root/script/3_httprobe/httprobe.txt
 ls ; wc -l $output/3_endpoint_JS.txt
 
