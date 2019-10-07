@@ -26,6 +26,7 @@ cat /root/script/3_httprobe/exe.sh | parallel --jobs 0 --delay 0.5
 rm /root/script/3_httprobe/exe.sh
 rm dir_* -r
 
+grep -oP "http.*" /root/script/3_httprobe/getjs.txt > /root/script/3_httprobe/getjs123.txt ; mv /root/script/3_httprobe/getjs123.txt /root/script/3_httprobe/getjs.txt
 sort -u /root/script/3_httprobe/getjs.txt -o /root/script/3_httprobe/getjs.txt
 ls ; wc -l /root/script/3_httprobe/getjs.txt
 
