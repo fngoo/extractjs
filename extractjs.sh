@@ -65,12 +65,12 @@ rm /root/script/3_httprobe/exe.sh
 
 rm dir_* -r
 
-grep -oP "http.*" $output/3_endpoint_JS.txt > $output/3_endpoint_JS123.txt ; mv $output/3_endpoint_JS123.txt $output/3_endpoint_JS.txt
+grep -oP "http.*" $output/3_endpoint_JS.txt > $output/3_endpoint_JS123.txt ; vl $output/3_endpoint_JS123.txt | grep 200 | grep -oP "http.*" > $output/3_endpoint_JS.txt ; rm $output/3_endpoint_JS123.txt
 sort -u /root/script/3_httprobe/httprobe.txt -o /root/script/3_httprobe/httprobe.txt
 ls ; wc -l $output/3_endpoint_JS.txt
 
 
 #Eyeiwtness
 cd /root/script/4_getjs/EyeWitness
-python3 EyeWitness.py -f $output/3_endpoint_JS.txt --all-protocols --no-prompt -d $output/3_endpoint_JS
+python3 EyeWitness.py -f $output/3_endpoint_JS.txt --web --no-prompt -d $output/3_endpoint_JS
 cd /root/script/3_httprobe
