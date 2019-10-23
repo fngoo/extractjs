@@ -71,6 +71,14 @@ ls ; wc -l $output/3_endpoint_JS.txt
 
 
 #Eyeiwtness
+for error in `cat $output/3_endpoint_JS.txt`
+do
+a=echo "$error" | grep -oP :
+if [ "$a" != ":" ]
+then
+sed "/$error/d" $output/3_endpoint_JS.txt >> $output/3_endpoint_JS1.txt ; mv $output/3_endpoint_JS1.txt $output/3_endpoint_JS.txt
+fi
+done
 cd /root/script/4_getjs
 rm -r EyeWitness
 cd /root/script/4_getjs
