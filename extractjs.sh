@@ -65,27 +65,27 @@ rm /root/script/3_httprobe/exe.sh
 
 rm dir_* -r
 
-grep -oP "http.*" $output/3_endpoint_JS.txt > $output/3_endpoint_JS123.txt ; vl $output/3_endpoint_JS123.txt | grep 200 | grep -oP "http.*" > $output/3_endpoint_JS.txt ; rm $output/3_endpoint_JS123.txt
+#grep -oP "http.*" $output/3_endpoint_JS.txt > $output/3_endpoint_JS123.txt ; vl $output/3_endpoint_JS123.txt | grep 200 | grep -oP "http.*" > $output/3_endpoint_JS.txt ; rm $output/3_endpoint_JS123.txt
 sort -u /root/script/3_httprobe/httprobe.txt -o /root/script/3_httprobe/httprobe.txt
 ls ; wc -l $output/3_endpoint_JS.txt
 
 
 #Eyeiwtness
-for error in `cat $output/3_endpoint_JS.txt`
-do
-a=echo "$error" | grep -oP /:
-if [ "$a" = "/:" ]
-then
-sed "/$error/d" $output/3_endpoint_JS.txt >> $output/3_endpoint_JS1.txt ; mv $output/3_endpoint_JS1.txt $output/3_endpoint_JS.txt
-fi
-done
-cd /root/script/4_getjs
-rm -r EyeWitness
-cd /root/script/4_getjs
-git clone https://github.com/FortyNorthSecurity/EyeWitness
-cd EyeWitness/setup ; bash setup.sh ; bash setup.sh ; pip3 install --upgrade pyasn1-modules
-cd ../
-mv $output/3_endpoint_JS.txt 3_endpoint_JS.txt
-python3 EyeWitness.py -f 3_endpoint_JS.txt --web --no-prompt -d 3_endpoint_JS
-rm 3_endpoint_JS.txt ; mv 3_endpoint_JS $output/3_endpoint_JS
+#for error in `cat $output/3_endpoint_JS.txt`
+#do
+#a=echo "$error" | grep -oP /:
+#if [ "$a" = "/:" ]
+#then
+#sed "/$error/d" $output/3_endpoint_JS.txt >> $output/3_endpoint_JS1.txt ; mv $output/3_endpoint_JS1.txt $output/3_endpoint_JS.txt
+#fi
+#done
+#cd /root/script/4_getjs
+#rm -r EyeWitness
+#cd /root/script/4_getjs
+#git clone https://github.com/FortyNorthSecurity/EyeWitness
+#cd EyeWitness/setup ; bash setup.sh ; bash setup.sh ; pip3 install --upgrade pyasn1-modules
+#cd ../
+#mv $output/3_endpoint_JS.txt 3_endpoint_JS.txt
+#python3 EyeWitness.py -f 3_endpoint_JS.txt --web --no-prompt -d 3_endpoint_JS
+#rm 3_endpoint_JS.txt ; mv 3_endpoint_JS $output/3_endpoint_JS
 cd /root/script/3_httprobe
