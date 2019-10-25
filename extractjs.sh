@@ -2,7 +2,9 @@
 
 cd /root/script/3_httprobe
 #创建目录
-input=httprobe.txt ; export input=httprobe.txt
+vl httprobe.txt | grep -v "\[50" | grep -oP "http.*" >> /root/script/3_httprobe/httprobe1.txt ; sort -u httprobe1.txt -o httprobe1.txt
+
+input=httprobe1.txt ; export input=httprobe1.txt
 i=1
 echo '#!/bin/bash' >> /root/script/3_httprobe/exe.sh
 
@@ -13,7 +15,6 @@ mkdir /root/script/3_httprobe/dir_$i
 
 
 echo '#!/bin/bash' >> /root/script/3_httprobe/dir_${i}/${i}.sh
-echo 'x=$x ; input=httprobe.txt' >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "cd /root/script/3_httprobe/dir_${i}" >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "echo \"$line\" >> /root/script/3_httprobe/dir_${i}/${input}" >> /root/script/3_httprobe/dir_${i}/${i}.sh
 echo "getJS -input $input -complete -output getjs${i}.txt; cat getjs${i}.txt >> /root/script/3_httprobe/getjs.txt; rm getjs${i}.txt" >> /root/script/3_httprobe/dir_${i}/${i}.sh
@@ -25,6 +26,7 @@ done
 cat /root/script/3_httprobe/exe.sh | parallel --jobs 0 --delay 0.5
 rm /root/script/3_httprobe/exe.sh
 rm dir_* -r
+rm httprobe1.txt
 
 grep -oP "http.*" /root/script/3_httprobe/getjs.txt > /root/script/3_httprobe/getjs123.txt ; mv /root/script/3_httprobe/getjs123.txt /root/script/3_httprobe/getjs.txt
 sort -u /root/script/3_httprobe/getjs.txt -o /root/script/3_httprobe/getjs.txt
