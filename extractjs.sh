@@ -81,12 +81,12 @@ mkdir $output/3_endpoint_js
 cd /root/script/4_getjs/EyeWitness
 python3 EyeWitness.py -f $output/3_endpoint_JS.txt --web --no-prompt -d $output/3_endpoint_js
 
-cd $output/5_dir
+cd $output/3_endpoint_js
 grep=`ls | grep report`
 if [ "$grep" = "" ]
 then
 cd $output
-rm -r $output/5_dir
+rm -r $output/3_endpoint_js
 fi
 
 
