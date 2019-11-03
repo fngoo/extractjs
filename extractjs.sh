@@ -2,7 +2,7 @@
 
 cd /root/script/3_httprobe
 #创建目录
-vl httprobe.txt | grep -v "\[50" | grep -oP "http.*" >> /root/script/3_httprobe/httprobe1.txt ; sort -u httprobe1.txt -o httprobe1.txt
+vl -s 50 httprobe.txt | grep -v "\[50" | grep -oP "http.*" >> /root/script/3_httprobe/httprobe1.txt ; sort -u httprobe1.txt -o httprobe1.txt
 
 input=httprobe1.txt ; export input=httprobe1.txt
 i=1
@@ -67,7 +67,7 @@ rm /root/script/3_httprobe/exe.sh
 
 rm dir_* -r
 
-grep -oP "http.*" $output/3_endpoint_JS.txt > $output/3_endpoint_JS123.txt ; vl $output/3_endpoint_JS123.txt | grep -v "\[50" | grep -oP "http.*" > $output/3_endpoint_JS.txt ; rm $output/3_endpoint_JS123.txt ; sort -u $output/3_endpoint_JS.txt -o $output/3_endpoint_JS.txt
+grep -oP "http.*" $output/3_endpoint_JS.txt > $output/3_endpoint_JS123.txt ; vl -s 50 $output/3_endpoint_JS123.txt | grep -v "\[50" | grep -oP "http.*" > $output/3_endpoint_JS.txt ; rm $output/3_endpoint_JS123.txt ; sort -u $output/3_endpoint_JS.txt -o $output/3_endpoint_JS.txt
 sort -u /root/script/3_httprobe/httprobe.txt -o /root/script/3_httprobe/httprobe.txt
 ls ; wc -l $output/3_endpoint_JS.txt
 
