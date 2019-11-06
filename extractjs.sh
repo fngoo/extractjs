@@ -79,14 +79,14 @@ git clone https://github.com/FortyNorthSecurity/EyeWitness
 cd EyeWitness/setup ; bash setup.sh ; bash setup.sh ; pip3 install --upgrade pyasn1-modules
 mkdir $output/3_endpoint_js
 cd /root/script/4_getjs/EyeWitness
-python3 EyeWitness.py -f $output/3_endpoint_JS.txt --web --no-prompt -d $output/3_endpoint_js
+python3 EyeWitness.py -f $output/3_endpoint_JS.txt --web --no-prompt -d $output/endpoint_js
 
-cd $output/3_endpoint_js
+cd $output/endpoint_js
 grep=`ls | grep report`
 if [ "$grep" = "" ]
 then
 cd $output
-rm -r $output/3_endpoint_js
+rm -r $output/endpoint_js
 fi
 
 
