@@ -69,25 +69,8 @@ rm dir_* -r
 
 grep -oP "http.*" $output/3_endpoint_JS.txt > $output/3_endpoint_JS123.txt ; vl -s 50 $output/3_endpoint_JS123.txt | grep -v "\[50" | grep -oP "http.*" > $output/3_endpoint_JS.txt ; rm $output/3_endpoint_JS123.txt ; sort -u $output/3_endpoint_JS.txt -o $output/3_endpoint_JS.txt
 sort -u /root/script/3_httprobe/httprobe.txt -o /root/script/3_httprobe/httprobe.txt
-ls ; wc -l $output/3_endpoint_JS.txt
-
-#Eyewitness
-cd /root/script/4_getjs
-rm -r EyeWitness
-cd /root/script/4_getjs
-git clone https://github.com/FortyNorthSecurity/EyeWitness
-cd EyeWitness/setup ; bash setup.sh ; bash setup.sh ; pip3 install --upgrade pyasn1-modules
-mkdir $output/endpoint_js
-cd /root/script/4_getjs/EyeWitness
-python3 EyeWitness.py -f $output/3_endpoint_JS.txt --web --no-prompt -d $output/endpoint_js
-
-cd $output/endpoint_js
-grep=`ls | grep report`
-if [ "$grep" = "" ]
-then
-cd $output
-rm -r $output/endpoint_js
-fi
+ls
+echo endpoint
 
 
 
