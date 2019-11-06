@@ -77,7 +77,7 @@ rm -r EyeWitness
 cd /root/script/4_getjs
 git clone https://github.com/FortyNorthSecurity/EyeWitness
 cd EyeWitness/setup ; bash setup.sh ; bash setup.sh ; pip3 install --upgrade pyasn1-modules
-mkdir $output/3_endpoint_js
+mkdir $output/endpoint_js
 cd /root/script/4_getjs/EyeWitness
 python3 EyeWitness.py -f $output/3_endpoint_JS.txt --web --no-prompt -d $output/endpoint_js
 
