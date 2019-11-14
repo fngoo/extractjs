@@ -69,6 +69,11 @@ rm dir_* -r
 
 grep -oP "http.*" $output/3_endpoint_JS.txt > $output/3_endpoint_JS123.txt ; vl -s 50 $output/3_endpoint_JS123.txt | grep -v "\[50" | grep -oP "http.*" > $output/3_endpoint_JS.txt ; rm $output/3_endpoint_JS123.txt ; sort -u $output/3_endpoint_JS.txt -o $output/3_endpoint_JS.txt
 sort -u /root/script/3_httprobe/httprobe.txt -o /root/script/3_httprobe/httprobe.txt
+for line in `cat $var`
+do
+grep $line $output/3_endpoint_JS.txt >> endpoint.txt
+done
+mv endpoint.txt $output/3_endpoint_JS.txt
 ls
 echo endpoint
 
