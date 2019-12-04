@@ -80,3 +80,4 @@ echo endpoint
 
 
 cd /root/script/3_httprobe
+exit
